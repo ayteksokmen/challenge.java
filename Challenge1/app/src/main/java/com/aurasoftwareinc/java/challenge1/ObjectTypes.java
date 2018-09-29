@@ -2,28 +2,22 @@ package com.aurasoftwareinc.java.challenge1;
 
 import org.json.JSONObject;
 
-public class ObjectTypes implements JsonMarshalInterface
-{
+public class ObjectTypes implements JsonMarshalInterface {
     public Byte objByte;
-    private Short objShort;
     public Integer objInt;
+    public Boolean objBoolean;
+    public Boolean objBooleanNull;
+    public String objString;
+    public String objStringNull;
+    public Byte[] objByteArray;
+    public Byte[] objByteArrayNull;
+    private Short objShort;
     private Long objLong;
-
     private Float objFloat;
     private Double objDouble;
     private Double objDoubleNull;
 
-    public Boolean objBoolean;
-    public Boolean objBooleanNull;
-
-    public String objString;
-    public String objStringNull;
-
-    public Byte[] objByteArray;
-    public Byte[] objByteArrayNull;
-
-    public void populateTestData()
-    {
+    public void populateTestData() {
         objByte = 42;
         objShort = 4242;
         objInt = 47114711;
@@ -36,14 +30,12 @@ public class ObjectTypes implements JsonMarshalInterface
     }
 
     @Override
-    public JSONObject marshalJSON()
-    {
+    public JSONObject marshalJSON() {
         return JsonMarshal.marshalJSON(this);
     }
 
     @Override
-    public boolean unmarshalJSON(JSONObject json)
-    {
+    public boolean unmarshalJSON(JSONObject json) {
         return JsonMarshal.unmarshalJSON(this, json);
     }
 }

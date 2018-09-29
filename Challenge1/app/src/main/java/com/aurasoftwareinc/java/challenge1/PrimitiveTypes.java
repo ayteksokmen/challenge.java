@@ -2,20 +2,17 @@ package com.aurasoftwareinc.java.challenge1;
 
 import org.json.JSONObject;
 
-public class PrimitiveTypes implements JsonMarshalInterface
-{
+public class PrimitiveTypes implements JsonMarshalInterface {
     public byte primByte;
-    private short primShort;
     public int primInt;
-    private long primLong;
     public float primFloat;
-    private double primDouble;
     public boolean primBoolean;
-
     public byte[] primByteArray;
+    private short primShort;
+    private long primLong;
+    private double primDouble;
 
-    public void populateTestData()
-    {
+    public void populateTestData() {
         primByte = 42;
         primShort = 4242;
         primInt = 47114711;
@@ -27,14 +24,12 @@ public class PrimitiveTypes implements JsonMarshalInterface
     }
 
     @Override
-    public JSONObject marshalJSON()
-    {
+    public JSONObject marshalJSON() {
         return JsonMarshal.marshalJSON(this);
     }
 
     @Override
-    public boolean unmarshalJSON(JSONObject json)
-    {
+    public boolean unmarshalJSON(JSONObject json) {
         return JsonMarshal.unmarshalJSON(this, json);
     }
 }

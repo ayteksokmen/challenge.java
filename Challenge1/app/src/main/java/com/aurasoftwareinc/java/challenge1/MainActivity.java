@@ -3,7 +3,6 @@ package com.aurasoftwareinc.java.challenge1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -12,24 +11,21 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
-public class MainActivity extends Activity
-{
+public class MainActivity extends Activity {
 
     private TextView text1;
     private TextView text2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         createLayout();
 
-        setTitle("Put Your Name Here...");
+        setTitle("Aytek Sökmen");
     }
 
-    private void createLayout()
-    {
+    private void createLayout() {
         FrameLayout topFrame = new FrameLayout(this);
         topFrame.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
@@ -80,22 +76,13 @@ public class MainActivity extends Activity
         testButton.setBackgroundColor(0xffffffff);
         testButton.setPadding(20, 20, 20, 20);
 
-        testButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                testIt();
-            }
-        });
+        testButton.setOnClickListener(v -> testIt());
 
         buttonFrame.addView(testButton);
     }
 
-    private void testIt()
-    {
-        try
-        {
+    private void testIt() {
+        try {
             //
             // Create instance and populate with test values.
             //
@@ -129,9 +116,7 @@ public class MainActivity extends Activity
             //
             // Both text views should now contain identical content.
             //
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }

@@ -3,15 +3,12 @@ package com.aurasoftwareinc.java.challenge1;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class JSONTypes implements JsonMarshalInterface
-{
+public class JSONTypes implements JsonMarshalInterface {
     public JSONObject jsonObject;
     private JSONArray jsonArray;
 
-    public void populateTestData()
-    {
-        try
-        {
+    public void populateTestData() {
+        try {
             jsonObject = new JSONObject();
 
             jsonObject.put("jsonFloat", 42.5f);
@@ -28,22 +25,18 @@ public class JSONTypes implements JsonMarshalInterface
             jsonArray.put("c");
             jsonArray.put("d");
             jsonArray.put("e");
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     @Override
-    public JSONObject marshalJSON()
-    {
+    public JSONObject marshalJSON() {
         return JsonMarshal.marshalJSON(this);
     }
 
     @Override
-    public boolean unmarshalJSON(JSONObject json)
-    {
+    public boolean unmarshalJSON(JSONObject json) {
         return JsonMarshal.unmarshalJSON(this, json);
     }
 }
