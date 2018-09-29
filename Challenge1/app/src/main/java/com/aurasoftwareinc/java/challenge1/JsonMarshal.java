@@ -16,6 +16,7 @@ import java.util.Objects;
 public class JsonMarshal {
 
     //Object Types for marshalling.
+
     private static List objectTypes = Arrays.asList(Byte.class, Short.class, Integer.class,
             Long.class, Float.class, Double.class, Boolean.class, String.class);
 
@@ -29,15 +30,18 @@ public class JsonMarshal {
         JSONObject json = new JSONObject();
 
         try {
+
             //
             // Every field is marshalling with loop
             //
+
             for (Field field : object.getClass().getDeclaredFields()) {
                 boolean isAccessible = field.isAccessible();
                 field.setAccessible(Boolean.TRUE);
                 Class<?> fieldType = field.getType();
                 Object fieldObject = field.get(object);
                 String fieldName = field.getName();
+
                 //
                 // No marshalling for null objects
                 //
@@ -49,9 +53,11 @@ public class JsonMarshal {
                     List<Object> fieldObjectList = marshalArray(fieldObject);
                     json.put(fieldName, new JSONArray(fieldObjectList));
                 } else if (JsonMarshalInterface.class.isAssignableFrom(fieldType)) {
+
                     //
                     // If the object implements from JsonMarshalInterface;
                     //
+
                     json.put(fieldName, ((JsonMarshalInterface) fieldObject)
                             .marshalJSON());
                 }
@@ -79,6 +85,7 @@ public class JsonMarshal {
                 field.setAccessible(Boolean.TRUE);
                 Class<?> fieldType = field.getType();
                 String fieldName = field.getName();
+
                 //
                 // No unmarshalling for objects without fields
                 //
@@ -92,9 +99,11 @@ public class JsonMarshal {
                     Object unMarshalArray = unmarshalArray(fieldType.getComponentType(), jsonArray);
                     field.set(object, unMarshalArray);
                 } else if (JsonMarshalInterface.class.isAssignableFrom(fieldType)) {
+
                     //
                     // If the object implements from JsonMarshalInterface;
                     //
+
                     Object newInstance = fieldType.newInstance();
                     ((JsonMarshalInterface) newInstance).unmarshalJSON((JSONObject) json.get(fieldName));
                     field.set(object, newInstance);
@@ -139,14 +148,18 @@ public class JsonMarshal {
                 if (isJsonDataType(arrayObject.getClass())) {
                     objectList.add(arrayObject);
                 } else if (arrayObject.getClass().isArray()) {
+
                     //
                     // Marshalling recursively if the object is array
                     //
+
                     objectList.add(marshalArray(arrayObject));
                 } else if (arrayObject instanceof JsonMarshalInterface) {
+
                     //
                     // If the object implements from JsonMarshalInterface;
                     //
+
                     objectList.add(((JsonMarshalInterface) arrayObject).marshalJSON());
                 }
             }
@@ -170,16 +183,20 @@ public class JsonMarshal {
             while (i < jsonArray.length()) {
                 Object jsonElement = jsonArray.get(i);
                 if (jsonElement instanceof JSONArray) {
+
                     //
                     // Unmarshalling recursively if the object is array
                     //
+
                     Array.set(array, i, unmarshalArray(type, (JSONArray) jsonElement));
                 } else if (isJsonDataType(type)) {
                     Array.set(array, i, jsonElement);
                 } else if (JsonMarshalInterface.class.isAssignableFrom(type)) {
+
                     //
                     // If the object implements from JsonMarshalInterface;
                     //
+
                     JsonMarshalInterface jsonMarshalInterface = (JsonMarshalInterface) type.newInstance();
                     jsonMarshalInterface.unmarshalJSON((JSONObject) jsonElement);
                     Array.set(array, i, jsonMarshalInterface);

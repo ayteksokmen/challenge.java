@@ -3,6 +3,7 @@ package com.aurasoftwareinc.java.challenge1;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -22,7 +23,7 @@ public class MainActivity extends Activity {
 
         createLayout();
 
-        setTitle("Aytek Sökmen");
+        setTitle("Put Your Name Here...");
     }
 
     private void createLayout() {
@@ -76,7 +77,12 @@ public class MainActivity extends Activity {
         testButton.setBackgroundColor(0xffffffff);
         testButton.setPadding(20, 20, 20, 20);
 
-        testButton.setOnClickListener(v -> testIt());
+        testButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                testIt();
+            }
+        });
 
         buttonFrame.addView(testButton);
     }
